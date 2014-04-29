@@ -1,0 +1,228 @@
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>NASA Centers</title>
+        
+        <!-- CSS links -->
+        <link rel="stylesheet" type="text/css" href="css/circleMenu.css" />
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="css/styles.css" rel="stylesheet" type="text/css" />
+        
+        <!-- JavaScript links -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/circleMenu.js"></script>
+        <script type="text/javascript"
+	  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAev4YtgvprKH2_G0xRKYA5FBjFG6th0k&sensor=false">
+	</script> <!-- set src to true or false -->
+        
+        <script> //circleMenu script
+            $(function(){
+                $('#menu').circleMenu({direction:'bottom-right',
+                    open: function(){console.log('menu opened');},
+                    close: function(){console.log('menu closed');},
+                    init: function(){console.log('menu initialized');}
+                });
+                
+                $('a').on('click',function(evt){if($(this).attr('href')==='#'){evt.preventDefault();}});
+                
+                $('#examples > div:first-child').css('display','block');
+                $('nav li:first-child a').addClass('active');
+                $('nav a').each(function(){
+                    var $link = $(this);
+                    $link.on('click', function(evt){
+                        $('nav a').removeClass('active');
+                        $('#examples > div').css('display','none');
+                        $('#'+$link.attr('rel')).css('display','block');
+                        $link.addClass('active');
+                    });
+                })
+            });
+        </script>
+        
+        <script type="text/javascript">//more circleMenu script
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-27581645-1']);
+            _gaq.push(['_trackPageview']);
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+        
+        <script> //Google maps street view
+            $(document).ready(function() {
+                console.log("doc ready")
+                //$('#nav').onePageNav();
+                goddardMap();
+            });
+	    
+            function goddardMap() { //can put multiple maps on page by changing variable, copy inside ftn initialize for 2nd map (mapOptions and map)
+            // create the map
+                console.log("goddard map function")
+                var mapOptions = { //creates variable
+                  center: new google.maps.LatLng(38.996944, -76.848333), // set center of map
+                  zoom: 8, // 1 = whole world, 18 = highest zoom
+                  mapTypeId: google.maps.MapTypeId.TERRAIN
+                };
+                
+                var map = new google.maps.Map(document.getElementById("map1"),
+                  mapOptions);
+                
+                var marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(38.996944, -76.848333),
+                  map: map,
+                  title: 'Hello World!'
+                });
+                
+                var contentString = '<h3>hello world!</h3><a href="#">Link</a>' //creates the html content for text bubble
+                
+                var infoWindow = new google.maps.InfoWindow({ //text bubble with content
+                  content: contentString,
+                  maxWidth: 200
+                });
+                
+                kennedyMap();
+            }
+            
+            function kennedyMap() { //can put multiple maps on page by changing variable, copy inside ftn initialize for 2nd map (mapOptions and map)
+            // create the map
+                console.log("kennedy map function")
+                var mapOptions = { //creates variable
+                  center: new google.maps.LatLng(28.524058, -80.65085), // set center of map
+                  zoom: 8, // 1 = whole world, 18 = highest zoom
+                  mapTypeId: google.maps.MapTypeId.TERRAIN
+                };
+                
+                var map = new google.maps.Map(document.getElementById("map2"),
+                  mapOptions);
+                
+                var marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(28.524058, -80.65085),
+                  map: map,
+                  title: 'Hello World!'
+                });
+                
+                var contentString = '<h3>hello world!</h3><a href="#">Link</a>' //creates the html content for text bubble
+                
+                var infoWindow = new google.maps.InfoWindow({ //text bubble with content
+                  content: contentString,
+                  maxWidth: 200
+                });
+                
+                johnsonMap();
+            }
+            
+            function johnsonMap() { //can put multiple maps on page by changing variable, copy inside ftn initialize for 2nd map (mapOptions and map)
+            // create the map
+                console.log("kennedy map function")
+                var mapOptions = { //creates variable
+                  center: new google.maps.LatLng(29.551881, -95.098343), // set center of map
+                  zoom: 8, // 1 = whole world, 18 = highest zoom
+                  mapTypeId: google.maps.MapTypeId.TERRAIN
+                };
+                
+                var map = new google.maps.Map(document.getElementById("map3"),
+                  mapOptions);
+                
+                var marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(29.551881, -95.098343),
+                  map: map,
+                  title: 'Hello World!'
+                });
+                
+                var contentString = '<h3>hello world!</h3><a href="#">Link</a>' //creates the html content for text bubble
+                
+                var infoWindow = new google.maps.InfoWindow({ //text bubble with content
+                  content: contentString,
+                  maxWidth: 200
+                });
+                
+                createStreetView();
+            }
+            
+	    function createStreetView() {
+                console.log("street view function")
+		var goddard = new google.maps.LatLng(28.605289, -80.669359);
+	      
+		// Note: constructed panorama objects have visible: true
+		// set by default.
+		var panoOptions = {
+		  position: goddard,
+		  addressControlOptions: {
+		    position: google.maps.ControlPosition.BOTTOM_CENTER
+		  },
+		  linksControl: false,
+		  panControl: false,
+		  zoomControlOptions: {
+		    style: google.maps.ZoomControlStyle.SMALL
+		  },
+		  enableCloseButton: false
+		};
+	      
+		var panorama = new google.maps.StreetViewPanorama(
+		    document.getElementById('map-cover'), panoOptions);
+		}
+	    
+            //google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+        
+    </head>
+    <body>
+        <div class="container indexPadding">
+            <div class="row">
+                <ul class="menu" id="menu">
+                    <li><a href="index.html"><img src="../images/logo.png" height="60px" /></a></li>
+                    <li><a href="/johnson.html" alt="JSC" title="Johnson">JSC</a></li>
+                    <li><a href="/kennedy.html" alt="KSC" title="Kennedy">KSC</a></li>
+                    <li><a href="/goddard.html" alt="GSFC" title="Goddard">GSFC</a></li>
+                </ul>
+            </div>
+            
+            <div class="row header">
+                <img src="../images/nasa.png" width="225px" align="center" />
+                <h2 class="white">The Agency's <div class="circle">3</div> Best Known Field Centers</h2>
+            </div>
+            
+            <div id="background">
+                <div class="row contentIndex">
+		    
+		    <div id="map-cover"></div>
+		    
+                    <div class="Goddard col-md-4 col-sm-12">
+                        <h3>Goddard</h3>
+			<h4 class="italic">Space Flight Center</h4>
+                        <div id="map1"></div>
+                        <h4 class="red"><div class="smallCircle">1</div> GSFC</h4>
+			<h4>Greenbelt, Maryland</h4>
+                        <p>GSFC is the largest combined organization of scientists and engineers in the United States dedicated to increasing knowledge of the Earth, the Solar System, and the Universe via observations from space. It is a major U.S. laboratory for developing and operating unmanned scientific spacecraft. GSFC has scientists who develop and support missions, and GSFC engineers and technicians who design and build the spacecraft and technology for those missions. </p>
+                    </div>
+                    
+                    <div class="Kennedy col-md-4 col-sm-12">
+                        <h3>John F. Kennedy</h3>
+			<h4 class="italic">Space Center</h4>
+                        <div id="map2"></div>
+                        <h4 class="red"><div class="smallCircle">2</div> KSC</h4>
+                        <h4>Merritt Island, Florida</h4>
+                        <p>KSC has been the launch site for every United States human space flight since 1968. Although such flights are currently on pause, KSC continues to manage and operate unmanned rocket launch facilities for America's civilian space program from three pads at the adjoining Cape Canaveral Air Force Station. Its iconic Vehicle Assembly Building (VAB) is the fourth-largest structure in the world (by volume) and was the largest when completed in 1965.</p>
+                    </div>
+                    
+                    <div class="Johnson col-md-4 col-sm-12">
+                        <h3>Lyndon B. Johnson</h3>
+			<h4 class="italic">Space Center</h4>
+                        <div id="map3"></div>
+                        <h4 class="red"><div class="smallCircle">3</div> JSC</h4>
+                        <h4>Houston, Texas</h4>
+                        <p>JSC is the center for human spaceflight training, research and flight control. It consists of a complex of 100 buildings over 1,620 acres. JSC is home to the United States astronaut corps and is responsible for training astronauts from both the U.S. and its international partners. It is often popularly referred to by its central function during missions as "Mission Control."  The center grew out of the Space Task Group soon after the creation of NASA to co-ordinate the US manned spaceflight program.</p>
+                    </div>
+                </div>
+                
+            </div> <!-- end #background -->
+            
+            <div class="footer">Web Design 2014 &copy; Margo Lanier</div>
+        </div> <!-- end .container -->
+    </body>
+</html>

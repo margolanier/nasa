@@ -1,0 +1,148 @@
+<!--
+Tutorial for 1stwebdesigner.com by Irina Borozan (email address: aniri(at)aniri(dot)ro)
+
+Subjects covered: google maps v3 api (street view and directions services)
+
+Date: October 2010
+-->
+
+<!DOCTYPE html> 
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+ 
+<head> 
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/> 
+	<title>Kennedy Space Center</title> 
+	<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script> 
+	<script type="text/javascript">
+		var map;
+		var panorama;
+		var panoramaOptions;
+		
+		var directionDisplay;
+		var directionsService;
+	
+		// the function called when the page loads; it shows the map and street view
+		function initialize() 
+		{
+			// coordinates for the center of the map
+			var mapCenter = new google.maps.LatLng(28.605561, -80.669548);
+			// options for the map
+			var mapOptions = {
+				center: mapCenter,
+				zoom: 19,
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+				streetViewControl: true
+			};
+			// create a new map object to be shown in the map_canvas1 div elements and with the options that were set
+			map = new google.maps.Map(document.getElementById("map_canvas1"), mapOptions);
+			
+			// options for the panorama
+			panoramaOptions = {
+				addressControl: true,
+				addressControlOptions: {
+					style: {backgroundColor: 'grey', color: 'yellow'}
+				},
+				position: mapCenter,
+				pov: {
+					heading: 140,
+					pitch: +10,
+					zoom: 1
+				}
+			};
+			// show the panorama in the map_canvas2 div element with the options that were set
+			panorama = new  google.maps.StreetViewPanorama(document.getElementById("map_canvas2"), panoramaOptions);
+			// set street view for map
+			map.setStreetView(panorama);
+			
+			// add marker for Kennedy Space Center
+				// on map
+			var marker = new google.maps.Marker({
+				position: mapCenter, 
+				map: map, 
+				title:"Kennedy Space Center"
+			});
+			google.maps.event.addListener(marker, 'click', function() {
+				panorama.setPosition(mapCenter);
+				panorama.setPov({heading: 140, pitch: +10, zoom: 1});
+			});
+				// on panorama
+			var markerPanorama = new google.maps.Marker({
+				  position: mapCenter,
+				  map: panorama,
+				  title: 'Kennedy Space Center'
+			 });
+
+			// add Shuttle Landing Facility marker
+				// on map
+			var positionShuttleLandingFacility = new google.maps.LatLng(28.615255, -80.693962);
+			var markerShuttleLandingFacility = new google.maps.Marker({
+				position: positionShuttleLandingFacility, 
+				map: map, 
+				title:"Shuttle Landing Facility"
+			});
+			// add listener to change panorama options when the marker is clicked
+			google.maps.event.addListener(markerShuttleLandingFacility, 'click', function() {
+				panorama.setPosition(positionShuttleLandingFacility);
+				panorama.setPov({heading: 140, pitch: +10, zoom: 1});
+			});
+				// on panorama
+			var markerShuttleLandingFacilityPanorama = new google.maps.Marker({
+				  position: positionShuttleLandingFacility,
+				  map: panorama,
+				  title: 'Shuttle Landing Facility'
+			 });
+			
+			// add Apollo/Saturn Center
+				// on map
+			var positionApolloSaturnCenter = new google.maps.LatLng(28.605266, -80.669751);
+			var markerApolloSaturnCenter = new google.maps.Marker({
+				position: positionApolloSaturnCenter, 
+				map: map, 
+				title:"Apollo/Saturn Center"
+			});
+			// add listener to change panorama options when the marker is clicked
+			google.maps.event.addListener(markerApolloSaturnCenter, 'click', function() {
+				panorama.setPosition(positionApolloSaturnCenter);
+				panorama.setPov({heading: 230, pitch: +10, zoom: 1});
+			});
+				// on panorama
+			var markerApolloSaturnCenterPanorama = new google.maps.Marker({
+				  position: positionApolloSaturnCenter,
+				  map: panorama,
+				  title: 'Apollo/Saturn Center'
+			 });
+			
+			// add KSC
+				// on map
+			var positionKSC = new google.maps.LatLng(228.605270, -80.669205);
+			var markerKSC = new google.maps.Marker({
+				position: positionKSC, 
+				map: map, 
+				title:"KSC"
+			});
+			// add listener to change panorama options when the marker is clicked
+			google.maps.event.addListener(markerKSC, 'click', function() {
+				panorama.setPosition(positionKSC);
+				panorama.setPov({heading: 230, pitch: +10, zoom: 1});
+			});
+				// on panorama
+			var markerKSCPanorama = new google.maps.Marker({
+				  position: positionKSC,
+				  map: panorama,
+				  title: 'KSC'
+			 });
+			
+		}
+		
+	</script> 
+
+</head> 
+
+<body onload="initialize()"> 
+	<div id="map_canvas1" style="width: 49%; height: 300px; float: left;"></div>
+	<div id="map_canvas2" style="width:49%; height: 300px; float: right;">use the pegman to choose location to visit</div> 
+	
+</body> 
+
+</html> 
