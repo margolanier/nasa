@@ -112,7 +112,7 @@ h3{
     width: 1760px;
 }
 
-.results > img{
+.results > a > img{
     height: 170px;
     margin-right: 5px;
     margin-bottom: 5px;

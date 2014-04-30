@@ -26,7 +26,7 @@ $(function() {
 		console.log(json);
 		
 		$.each(json.data,function(i,data){
-			html += '<img src ="' + data.images.low_resolution.url + '">'
+			html += '<a href="' + data.link + '" target="_blank"><img src ="' + data.images.low_resolution.url + '"></a>'
 		});
 		
 		console.log(html);
